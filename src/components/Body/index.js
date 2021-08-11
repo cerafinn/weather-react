@@ -1,0 +1,1 @@
+// container to display the weather for the city searched, pass down props from header to the weather component
