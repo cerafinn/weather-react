@@ -1,45 +1,41 @@
 // container to display the weather for the city searched, pass down props from header to the weather component
 
+import axios from 'axios';
 import React, { useState } from 'react';
 import Weather from '../Weather';
 
 function Body() {
-  // using hard coded weather information to view frontend
-
-  const [forecast] = useState([
-    {
-      date: "08/12/2021",
-      description: "heatwave",
-      currentTemp: "38 C",
-      minTemp: "20 C",
-      maxTemp: "40 C",
-      windSpeed: "20km/hr",
-      precipitation: "40%",
-      humidity: "52"
-    },
-    {
-      date: "08/13/2021",
-      description: "heatwave day 2",
-      currentTemp: "37 C",
-      minTemp: "22 C",
-      maxTemp: "41 C",
-      windSpeed: "10km/hr",
-      precipitation: "30%",
-      humidity: "50"
-    }
-])
+  const [forecast] = useState([ ]);
 
 const [ currentCity, setCurrentCity ] = useState('');
 
-  // build axios call to get information from open weather api
+  var apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
-  function searchCity(event) {
+  const getCoord = async city => {
+    const coordAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    const { data } = await axios(coordAPI);
+
+    if(!data || data.length === 0) {
+      console.log("error")
+    }
+    return data;
+}
+
+  const getForecast = async (lat, lon) => {
+    const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&appid=' + apiKey;
+    const { data } = await axios(weatherAPI);
+    console.log({ data })
+
+    return data;
+  }
+
+  const searchCity = async event => {
     event.preventDefault();
-
     if (!currentCity || currentCity === '') {
       console.log("error");
     }
-    console.log(currentCity);
+    const res = await getCoord(currentCity);
+    const weather = await getForecast(res.coord.lat, res.coord.lon)
   }
 
   return (
@@ -62,7 +58,7 @@ const [ currentCity, setCurrentCity ] = useState('');
 
       <div>
       {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
-        <div className="flex-row">
+        <div className="d-flex flex-row">
           {forecast.map((forecast, idx) => (
             <Weather
               forecast={forecast}
