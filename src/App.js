@@ -11,15 +11,15 @@ function App() {
 
   return (
     <div className="App">
-      <Header
-        city={city}
-        setCurrentCity={setCurrentCity}
-        currentCity={currentCity}>
-      </Header>
+      <Header />
       <main>
-        <Body currentCity={currentCity}></Body>
+        <Body
+          city={city}
+          setCurrentCity={setCurrentCity}
+          currentCity={currentCity}
+        ></Body>
       </main>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }
