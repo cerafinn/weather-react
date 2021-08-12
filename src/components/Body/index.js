@@ -1,10 +1,9 @@
 // container to display the weather for the city searched, pass down props from header to the weather component
 
-
 import React, { useState } from 'react';
 import Weather from '../Weather';
 
-function Body(props) {
+function Body() {
   // using hard coded weather information to view frontend
 
   const [forecast] = useState([
@@ -30,13 +29,35 @@ function Body(props) {
     }
 ])
 
+const [ currentCity, setCurrentCity ] = useState('');
+
   // build axios call to get information from open weather api
+
+  function searchCity(event) {
+    event.preventDefault();
+
+    if (!currentCity || currentCity === '') {
+      console.log("error");
+    }
+    console.log(currentCity);
+  }
 
   return (
     <div>
-      <form>
-        <input type="text" className="" placeholder="Enter City Name" id="city-name"/>
-        <button className="btn btn-primary">Search</button>
+      <form onSubmit={searchCity}>
+        <input
+          type="text"
+          className=""
+          placeholder="Enter City Name"
+          id="city-name"
+          value={currentCity}
+          onChange={(event => setCurrentCity(event.target.value))}
+        />
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={searchCity}
+        >Search</button>
       </form>
 
       <div>
