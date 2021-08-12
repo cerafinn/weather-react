@@ -2,7 +2,7 @@
 
 
 import React from 'react';
-// import Weather from '../Weather';
+import Weather from '../Weather';
 
 function Body(props) {
   // using hard coded weather information to view frontend
@@ -20,9 +20,15 @@ function Body(props) {
 
   return (
     <div>
-      {/* search box for city, include an error popup */}
+      <form>
+        <input type="text" className="" placeholder="Enter City Name" id="city-name"/>
+        <button className="btn btn-primary">Search</button>
+      </form>
 
+      <div>
       {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
+        <Weather></Weather>
+      </div>
     </div>
   );
 }
