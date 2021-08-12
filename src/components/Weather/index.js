@@ -2,23 +2,23 @@
 
 import React from 'react';
 
-function Weather() {
+function Weather({ forecast }) {
+  const { date, description, currentTemp, minTemp, maxTemp, windSpeed, precipitation, humidity } = forecast;
+
   return(
     <div>
-      {/* {forecast.map((daily) => ( */}
-            <div className="card">
-              <div className="card-body">
-              <h5 className="card-title"><strong>date</strong></h5>
-              <p><strong>Conditions:</strong> <img src="" alt="forecast" className="project-img" key="forecast" /></p>
-              <p><strong>Current temperature:</strong> temp</p>
-              <p><strong>Minimum temperature:</strong> min temp</p>
-              <p><strong>Maximum temperature:</strong> max temp</p>
-              <p><strong>Wind Speed:</strong> speed</p>
-              <p><strong>Precipitation:</strong> percentage</p>
-              <p><strong>Humidity:</strong> humidity</p>
+        <div className="card">
+        <div className="card-body">
+        <h5 className="card-title"><strong>{date}</strong></h5>
+        <p><strong>Conditions:</strong> <img src="" alt="forecast" className="project-img" key="forecast" /> {description}</p>
+              <p><strong>Current temperature:</strong> {currentTemp}</p>
+              <p><strong>Minimum temperature:</strong> {minTemp}</p>
+              <p><strong>Maximum temperature:</strong> {maxTemp}</p>
+              <p><strong>Wind Speed:</strong> {windSpeed}</p>
+              <p><strong>Precipitation:</strong> {precipitation}</p>
+              <p><strong>Humidity:</strong> {humidity}</p>
             </div>
             </div>
-          {/* ))} */}
     </div>
   )
 }
