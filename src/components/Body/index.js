@@ -1,8 +1,9 @@
-// container to display the weather for the city searched, pass down props from header to the weather component
+// container to display the weather for the city searched, pass down props from body to the weather component
 
 import axios from 'axios';
 import React, { useState } from 'react';
 import Weather from '../Weather';
+import { currentWeatherForecast, sevenDayForecast } from '../../utils/helpers';
 
 function Body() {
   const [forecast, setForecast] = useState({});
@@ -23,13 +24,19 @@ function Body() {
   const getForecast = async (lat, lon) => {
     const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&appid=' + apiKey;
     const { data } = await axios(weatherAPI);
-    console.log({ data });
 
     if(!data || data.length === 0) {
       console.log("error");
     };
 
     return data;
+  };
+
+  const displayForecast = data => {
+    const currentForecast = currentWeatherForecast(data);
+    const weekForecast = sevenDayForecast(data);
+
+    setForecast({ currentForecast, weekForecast });
   };
 
   const searchCity = async event => {
@@ -40,7 +47,8 @@ function Body() {
     const res = await getCoord(currentCity);
     const weather = await getForecast(res.coord.lat, res.coord.lon);
 
-    return weather;
+    displayForecast(weather);
+    console.log(forecast);
   }
 
   return (
@@ -64,13 +72,7 @@ function Body() {
       <div>
       {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
         <div className="d-flex flex-row">
-          {/* {forecast.map((forecast, idx) => (
-            <Weather
-              forecast={forecast}
-              key={"day" + idx}
-            />
-          ))} */}
-          <Weather />
+          <Weather forecast={forecast} />
         </div>
       </div>
     </div>

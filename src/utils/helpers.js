@@ -4,7 +4,6 @@ function formatDate(data) {
   const date = new Date(data*1000);
   const momentDate = (moment(date).format('L'));
   console.log(momentDate);
-  return momentDate;
 };
 
 function formatTemp(data) {
@@ -20,16 +19,16 @@ export const currentWeatherForecast = data => ({
   minTemp: formatTemp(data.daily[0].temp.min),
   maxTemp: formatTemp(data.daily[0].temp.max),
   windSpeed: data.current.wind_speed,
-  precipitation: formatTemp(data.daily[0].pop),
+  precipitation: data.daily[0].pop,
   humidity: data.current.humidity
 });
 
-export const sevenDayForecast = data => data.map(day => ({
-  date: formatDate(data.daily.dt),
-  icon: data.daily.weather[0].icon,
-  description: data.daily.weather[0].description,
-  minTemp: formatTemp(data.daily.temp.min),
-  maxTemp: formatTemp(data.daily.temp.max),
-  precipitation: formatTemp(data.daily.pop),
-  humidity: data.current.humidity
+export const sevenDayForecast = data => data.daily.slice(1).map(data => ({
+  date: formatDate(data.dt),
+  icon: data.weather[0].icon,
+  description: data.weather[0].description,
+  minTemp: formatTemp(data.temp.min),
+  maxTemp: formatTemp(data.temp.max),
+  precipitation: data.pop,
+  humidity: data.humidity
 }));

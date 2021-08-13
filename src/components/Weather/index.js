@@ -2,18 +2,7 @@
 
 import React from 'react';
 
-function Weather() {
-  const forecast = [{
-    date: "8/12/2021",
-    description: "Cloudy",
-    currentTemp: "currentTemperature",
-    minTemp: "minTemperature",
-    maxTemp: "maxTemperature",
-    windSpeed: "windSpeed",
-    precipitation: "precipitation",
-    humidity: "humidity"
-  }];
-  
+function Weather(forecast) {
   const { date, description, currentTemp, minTemp, maxTemp, windSpeed, precipitation, humidity } = forecast;
 
   return(
