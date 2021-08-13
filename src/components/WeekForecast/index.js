@@ -1,9 +1,11 @@
 import React from 'react';
 
 function WeekForecast({ forecast }) {
+
+
   return(
-    <div>
-      {forecast.map(daily => (
+    <div className="d-flex flex-wrap justify-content-around">
+      {forecast.map((daily) => (
         <div className="card col-md-3">
           <div className="card-body">
             <h5 className="card-title"><strong>{daily.date}</strong></h5>

@@ -8,7 +8,7 @@ function Weather({ forecast }) {
   return(
     <div>
       <CurrentForecast forecast={forecast.currentForecast} />
-      <WeekForecast className="d-flex flex-row" forecast={forecast.weekForecast} />
+      <WeekForecast forecast={forecast.weekForecast} />
     </div>
   )
 }
