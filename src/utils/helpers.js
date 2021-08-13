@@ -13,7 +13,7 @@ function formatTemp(data) {
 
 export const currentWeatherForecast = data => ({
   date: formatDate(data.current.dt),
-  icon: data.current.weather[0].icon,
+  icon: 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png',
   description: data.current.weather[0].description,
   currentTemp: formatTemp(data.current.temp),
   minTemp: formatTemp(data.daily[0].temp.min),
@@ -25,7 +25,7 @@ export const currentWeatherForecast = data => ({
 
 export const sevenDayForecast = data => data.daily.slice(1).map(data => ({
   date: formatDate(data.dt),
-  icon: data.weather[0].icon,
+  icon: 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '.png',
   description: data.weather[0].description,
   minTemp: formatTemp(data.temp.min),
   maxTemp: formatTemp(data.temp.max),

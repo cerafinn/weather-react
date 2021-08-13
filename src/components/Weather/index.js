@@ -3,13 +3,13 @@
 import React from 'react';
 
 function Weather(forecast) {
-  const { date, description, currentTemp, minTemp, maxTemp, windSpeed, precipitation, humidity } = forecast;
+  const { date, icon, description, currentTemp, minTemp, maxTemp, windSpeed, precipitation, humidity } = forecast.currentForecast;
 
   return(
     <div className="card col-md-3">
       <div className="card-body">
         <h5 className="card-title"><strong>{date}</strong></h5>
-        <p><strong>Conditions:</strong> <img src="" alt="forecast" className="project-img" key="forecast" /> {description}</p>
+        <p><strong>Conditions:</strong> <img src={icon.default} alt="forecast" /> {description}</p>
         <p><strong>Current temperature:</strong> {currentTemp}</p>
         <p><strong>Minimum temperature:</strong> {minTemp}</p>
         <p><strong>Maximum temperature:</strong> {maxTemp}</p>
