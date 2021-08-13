@@ -5,9 +5,8 @@ import React, { useState } from 'react';
 import Weather from '../Weather';
 
 function Body() {
-  const [forecast] = useState([ ]);
-
-const [ currentCity, setCurrentCity ] = useState('');
+  const [forecast, setForecast] = useState({});
+  const [ currentCity, setCurrentCity ] = useState('');
 
   var apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
@@ -16,18 +15,22 @@ const [ currentCity, setCurrentCity ] = useState('');
     const { data } = await axios(coordAPI);
 
     if(!data || data.length === 0) {
-      console.log("error")
-    }
+      console.log("error");
+    };
     return data;
 }
 
   const getForecast = async (lat, lon) => {
-    const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&appid=' + apiKey;
+    const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&appid=' + apiKey;
     const { data } = await axios(weatherAPI);
     console.log({ data })
 
+    if(!data || data.length === 0) {
+      console.log("error");
+    };
+
     return data;
-  }
+  };
 
   const searchCity = async event => {
     event.preventDefault();
@@ -35,7 +38,9 @@ const [ currentCity, setCurrentCity ] = useState('');
       console.log("error");
     }
     const res = await getCoord(currentCity);
-    const weather = await getForecast(res.coord.lat, res.coord.lon)
+    const weather = await getForecast(res.coord.lat, res.coord.lon);
+
+    return weather;
   }
 
   return (
@@ -59,12 +64,13 @@ const [ currentCity, setCurrentCity ] = useState('');
       <div>
       {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
         <div className="d-flex flex-row">
-          {forecast.map((forecast, idx) => (
+          {/* {forecast.map((forecast, idx) => (
             <Weather
               forecast={forecast}
               key={"day" + idx}
             />
-          ))}
+          ))} */}
+          <Weather />
         </div>
       </div>
     </div>
