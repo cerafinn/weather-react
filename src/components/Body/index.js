@@ -23,7 +23,7 @@ function Body() {
   const getForecast = async (lat, lon) => {
     const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&appid=' + apiKey;
     const { data } = await axios(weatherAPI);
-    console.log({ data })
+    console.log({ data });
 
     if(!data || data.length === 0) {
       console.log("error");
