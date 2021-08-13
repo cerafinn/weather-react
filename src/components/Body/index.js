@@ -6,14 +6,15 @@ import Weather from '../Weather';
 import { currentWeatherForecast, sevenDayForecast, capitalizeFirstLetter } from '../../utils/helpers';
 
 function Body() {
-  const [forecast, setForecast] = useState(null);
   const [ currentCity, setCurrentCity ] = useState('');
+  const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
     if(currentCity === '' || !currentCity) {
       document.title = ("Weather Dashboard");      
-    }
+    } else {
     document.title = (capitalizeFirstLetter(currentCity) + " - Weather Dashboard");
+    }
   }, [currentCity]);
 
   var apiKey = "e8e23b4a156b56df078fbb140bab8322";
@@ -62,24 +63,26 @@ function Body() {
 
   return (
     <div>
-      <form onSubmit={searchCity}>
-        <input
-          type="text"
-          className=""
-          placeholder="Enter City Name"
-          id="city-name"
-          value={currentCity}
-          onChange={(event => setCurrentCity(event.target.value))}
-        />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={searchCity}
-        >Search</button>
-      </form>
-
-      <div>
-      {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
+      <div className="search-form">
+        <h3>Enter the city and country, or the zipcode below:</h3>
+        <form onSubmit={searchCity}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter city/country or zipcode"
+            id="city-name"
+            value={currentCity}
+            onChange={(event => setCurrentCity(event.target.value))}
+          />
+          <button
+            className="btn btn-secondary btn-lrg mt-2 search-button"
+            type="submit"
+            onClick={searchCity}
+          >SEARCH</button>
+        </form>
+      </div>
+      <div id="full-forecast">
+        {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
         {forecast && <Weather forecast={forecast} />}
       </div>
     </div>

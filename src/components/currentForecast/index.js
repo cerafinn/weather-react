@@ -4,10 +4,10 @@ function CurrentForecast({ forecast }) {
   const { date, icon, description, currentTemp, minTemp, maxTemp, windSpeed, precipitation, humidity } = forecast;
 
   return (
-    <div className="card justify-content-around">
+    <div className="card justify-content-center current-weather">
     <div className="card-body">
-      <h5 className="card-title"><strong>{date}</strong></h5>
-      <p><strong>Conditions:</strong> <img src={icon} alt="forecast" /> {description}</p>
+      <h4 className="card-title"><strong>{date}</strong> <img src={icon} alt="forecast" /></h4>
+      <p><strong>Conditions:</strong> {description}</p>
       <p><strong>Current temperature:</strong> {currentTemp}</p>
       <p><strong>Minimum temperature:</strong> {minTemp}</p>
       <p><strong>Maximum temperature:</strong> {maxTemp}</p>

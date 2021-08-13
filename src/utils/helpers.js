@@ -17,7 +17,7 @@ function formatTemp(data) {
 
 export const currentWeatherForecast = data => ({
   date: formatDate(data.current.dt),
-  icon: 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png',
+  icon: 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '@2x.png',
   description: data.current.weather[0].description,
   currentTemp: formatTemp(data.current.temp),
   minTemp: formatTemp(data.daily[0].temp.min),
