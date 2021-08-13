@@ -3,7 +3,7 @@ import moment from 'moment';
 function formatDate(data) {
   const date = new Date(data*1000);
   const momentDate = (moment(date).format('L'));
-  console.log(momentDate);
+  return momentDate;
 };
 
 function formatTemp(data) {
@@ -23,7 +23,7 @@ export const currentWeatherForecast = data => ({
   humidity: data.current.humidity
 });
 
-export const sevenDayForecast = data => data.daily.slice(1).map(data => ({
+export const sevenDayForecast = data => data.daily.slice(1).map((data) => ({
   date: formatDate(data.dt),
   icon: 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '.png',
   description: data.weather[0].description,

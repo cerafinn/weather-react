@@ -6,7 +6,7 @@ import Weather from '../Weather';
 import { currentWeatherForecast, sevenDayForecast } from '../../utils/helpers';
 
 function Body() {
-  const [forecast, setForecast] = useState({});
+  const [forecast, setForecast] = useState(null);
   const [ currentCity, setCurrentCity ] = useState('');
 
   var apiKey = "e8e23b4a156b56df078fbb140bab8322";
@@ -32,9 +32,9 @@ function Body() {
     return data;
   };
 
-  const displayForecast = data => {
-    const currentForecast = currentWeatherForecast(data);
-    const weekForecast = sevenDayForecast(data);
+  const displayForecast = async data => {
+    const currentForecast = await currentWeatherForecast(data);
+    const weekForecast = await sevenDayForecast(data);
 
     setForecast({ currentForecast, weekForecast });
   };
@@ -48,7 +48,9 @@ function Body() {
     const weather = await getForecast(res.coord.lat, res.coord.lon);
 
     displayForecast(weather);
-    console.log(forecast);
+    
+    const totalForecast = await forecast;
+    console.log(totalForecast);
   }
 
   return (
@@ -71,9 +73,7 @@ function Body() {
 
       <div>
       {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
-        <div className="d-flex flex-row">
-          <Weather forecast={forecast} />
-        </div>
+        {forecast && <Weather forecast={forecast} />}
       </div>
     </div>
   );
