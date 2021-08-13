@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Weather React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+This application is designed to display weather conditions for the searched city or zipcode, using the openweathermap onecall API. The user can view detailed weather information regarding current conditions as well as the forecast for the upcoming seven days.
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+Table of Contents |
+-------------------|
+[Installation](#Installation)
+[Usage](#Usage)
+[Technologies](#Technologies)
+[Screenshots](#Screenshots)
+[Contributing](#Contributing)
+[Author](#Author)
+[Questions](#Questions)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+In order to run the project locally, ensure that dependencies are installed by running:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm install`
 
-### `npm run build`
+In order to run the application in an Android simulator, ensure that all dependencies have been installed. In the command line enter the following commands: `npm run prod` in order to create the build folder required to create the application as well as start the server on localhost:5000. Next, `ionic capacitor add android` to create the android files needed for the android application. Enter `npx cap open android` to open the android file within the simulator, or open the newly created android folder in Android Studio. The application will require a build in Android Studio prior to running the application on the simulator.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Alternatively, users can navigated to the [deployed link](https://cerafinn.github.io/weatherreact) on the simulator in order to view the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Note: As of this time, the android application build fails to execute due to issues with querying the files in the build folder.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br />
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The application makes a call to the openweathermap API one-call after the user enters the City or zipcode they wish to search and the forecast is dynamically displayed below the search bar.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can find the deployed link and the repository link below:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Deployed Link: [Deployed Link](https://cerafinn.github.io/weatherreact)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Repo Link: [Repo Link](https://github.com/cerafinn/weatherreact)
 
-## Learn More
+<br />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Technologies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* HTML
+* CSS
+* JavaScript
+* React.js
+* Axios
+* Bootstrap
+* Capacitor
 
-### Code Splitting
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Screenshots
 
-### Analyzing the Bundle Size
+![IMG](./assets/images/weatherreact-screenshot.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br />
 
-### Making a Progressive Web App
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+If interested in contributing to the project, feel free to reach out. Contact information can be found in the Questions section.
 
-### Advanced Configuration
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Author
 
-### Deployment
+Andaleeb Farooq: [:octocat:](https://github.com/cerafinn)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br />
 
-### `npm run build` fails to minify
+## Questions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you have any questions or issues, feel free to reach out at: andaleeb.farooq@gmail.com.
+You can also find more of my work on Github at [github link](https://github.com/cerafinn).

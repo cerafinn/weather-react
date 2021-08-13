@@ -64,12 +64,12 @@ function Body() {
   return (
     <div>
       <div className="search-form">
-        <h3>Enter the city and country, or the zipcode below:</h3>
+        <h3>Enter the city and country initials, or the zipcode below:</h3>
         <form onSubmit={searchCity}>
           <input
             type="text"
             className="form-control"
-            placeholder="Enter city/country or zipcode"
+            placeholder="Enter city/country initials or zipcode"
             id="city-name"
             value={currentCity}
             onChange={(event => setCurrentCity(event.target.value))}
