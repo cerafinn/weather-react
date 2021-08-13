@@ -1,0 +1,7 @@
+{
+  "name": "weather-react",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
