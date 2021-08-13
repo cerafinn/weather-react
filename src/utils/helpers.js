@@ -1,5 +1,9 @@
 import moment from 'moment';
 
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 function formatDate(data) {
   const date = new Date(data*1000);
   const momentDate = (moment(date).format('L'));

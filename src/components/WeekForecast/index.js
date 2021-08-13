@@ -1,8 +1,6 @@
 import React from 'react';
 
 function WeekForecast({ forecast }) {
-
-
   return(
     <div className="d-flex flex-wrap justify-content-around">
       {forecast.map((daily) => (

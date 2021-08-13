@@ -1,13 +1,20 @@
 // container to display the weather for the city searched, pass down props from body to the weather component
 
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Weather from '../Weather';
-import { currentWeatherForecast, sevenDayForecast } from '../../utils/helpers';
+import { currentWeatherForecast, sevenDayForecast, capitalizeFirstLetter } from '../../utils/helpers';
 
 function Body() {
   const [forecast, setForecast] = useState(null);
   const [ currentCity, setCurrentCity ] = useState('');
+
+  useEffect(() => {
+    if(currentCity === '' || !currentCity) {
+      document.title = ("Weather Dashboard");      
+    }
+    document.title = (capitalizeFirstLetter(currentCity) + " - Weather Dashboard");
+  }, [currentCity]);
 
   var apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
