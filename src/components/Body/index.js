@@ -11,12 +11,14 @@ function Body() {
   const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
-    if(currentCity === '' || !currentCity) {
+    if (currentZip !== '') {
+      document.title = currentZip + " - Weather Dashboard"
+    } else if(currentCity === '' || !currentCity) {
       document.title = ("Weather Dashboard");      
     } else {
     document.title = (capitalizeFirstLetter(currentCity) + " - Weather Dashboard");
     }
-  }, [currentCity]);
+  }, [currentZip, currentCity]);
 
   const apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
@@ -44,6 +46,7 @@ function Body() {
   const getForecast = async (lat, lon) => {
     const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&appid=' + apiKey;
     const { data } = await axios(weatherAPI);
+    console.log({ data })
 
     if(!data || data.length === 0) {
       console.log("error");

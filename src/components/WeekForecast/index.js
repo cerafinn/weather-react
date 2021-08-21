@@ -8,10 +8,10 @@ function WeekForecast({ forecast }) {
           <div className="card-body">
             <h5 className="card-title"><strong>{daily.date}</strong><img src={daily.icon} alt="forecast" key={daily.date} /></h5>
             <p><strong>Conditions:</strong> {daily.description}</p>
-            <p><strong>Minimum temperature:</strong> {daily.minTemp}</p>
-            <p><strong>Maximum temperature:</strong> {daily.maxTemp}</p>
+            <p><strong>Minimum temperature:</strong> {daily.minTemp} °C</p>
+            <p><strong>Maximum temperature:</strong> {daily.maxTemp} °C</p>
             <p><strong>Precipitation:</strong> {daily.precipitation}</p>
-            <p><strong>Humidity:</strong> {daily.humidity}</p>
+            <p><strong>Humidity:</strong> {daily.humidity} %</p>
           </div>
         </div>
       ))}
