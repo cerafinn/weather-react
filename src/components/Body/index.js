@@ -31,8 +31,9 @@ function Body() {
   };
 
   const getZipCoord = async zip => {
-    const coordAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + zip + "&appid=" + apiKey;
+    const coordAPI = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zip + ",us&appid=" + apiKey;
     const { data } = await axios(coordAPI);
+    console.log({ data });
 
     if(!data || data.length === 0) {
       console.log("error");
@@ -78,30 +79,51 @@ function Body() {
       console.log("error");
     }
     const res = await getZipCoord(currentZip);
-    const weather = await getForecast(res.coord.lat, res.coord.lon);
+    const weather = await getForecast(res.city.coord.lat, res.city.coord.lon);
 
     displayForecast(weather);
   }
 
   return (
     <div>
-      <div className="search-form">
+      <div className="d-flex flex-wrap justify-content-center">
+      <div className="search-form m-1">
         <h3>Enter the city and country initials:</h3>
         <form onSubmit={searchCity}>
           <input
             type="text"
             className="form-control"
-            placeholder="e.g.: London, CA or London, UK"
+            placeholder="e.g.: London, CA or London, UK for city; 10053 for zipcode"
             id="city-name"
-            value={ currentCity}
+            value={currentCity}
             onChange={(event => setCurrentCity(event.target.value))}
           />
           <button
             className="btn btn-secondary btn-lrg mt-2 search-button"
             type="submit"
             onClick={searchCity}
-          >SEARCH</button>
+          >SEARCH CITY</button>
         </form>
+      </div>
+
+        <div className="search-form m-1">
+        <h3>Enter the zipcode:</h3>
+        <form onSubmit={searchZip}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="e.g.: 10053"
+            id="city-name"
+            value={currentZip}
+            onChange={(event => setCurrentZip(event.target.value))}
+          />
+          <button
+            className="btn btn-secondary btn-lrg mt-2 search-button"
+            type="submit"
+            onClick={searchZip}
+          >SEARCH ZIPCODE</button>
+        </form>
+      </div>
       </div>
       <div id="full-forecast">
         {/* add weather forecast based on search, using weather component to build each card for the 7 days */}
