@@ -7,6 +7,7 @@ import { currentWeatherForecast, sevenDayForecast, capitalizeFirstLetter } from 
 
 function Body() {
   const [ currentCity, setCurrentCity ] = useState('');
+  const [ currentZip, setCurrentZip ] = useState('');
   const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ function Body() {
 
   const apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
-  const getCoord = async city => {
+  const getCityCoord = async city => {
     const coordAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
     const { data } = await axios(coordAPI);
 
@@ -27,7 +28,17 @@ function Body() {
       console.log("error");
     };
     return data;
-}
+  };
+
+  const getZipCoord = async zip => {
+    const coordAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + zip + "&appid=" + apiKey;
+    const { data } = await axios(coordAPI);
+
+    if(!data || data.length === 0) {
+      console.log("error");
+    };
+    return data;
+  }
 
   const getForecast = async (lat, lon) => {
     const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&appid=' + apiKey;
@@ -52,26 +63,37 @@ function Body() {
     if (!currentCity || currentCity === '') {
       console.log("error");
     }
-    const res = await getCoord(currentCity);
+    const res = await getCityCoord(currentCity);
     const weather = await getForecast(res.coord.lat, res.coord.lon);
 
     displayForecast(weather);
     
-    const totalForecast = await forecast;
-    console.log(totalForecast);
+    // const totalForecast = await forecast;
+    // console.log(totalForecast);
+  }
+
+  const searchZip = async event => {
+    event.preventDefault();
+    if (!currentZip || currentZip === '') {
+      console.log("error");
+    }
+    const res = await getZipCoord(currentZip);
+    const weather = await getForecast(res.coord.lat, res.coord.lon);
+
+    displayForecast(weather);
   }
 
   return (
     <div>
       <div className="search-form">
-        <h3>Enter the city and country initials, or the zipcode below:</h3>
+        <h3>Enter the city and country initials:</h3>
         <form onSubmit={searchCity}>
           <input
             type="text"
             className="form-control"
-            placeholder="Enter city/country initials or zipcode"
+            placeholder="e.g.: London, CA or London, UK"
             id="city-name"
-            value={currentCity}
+            value={ currentCity}
             onChange={(event => setCurrentCity(event.target.value))}
           />
           <button
