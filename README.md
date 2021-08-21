@@ -49,6 +49,7 @@ Repo Link: [Repo Link](https://github.com/cerafinn/weatherreact)
 * React.js
 * Axios
 * Bootstrap
+* Moment
 * Capacitor
 
 <br />

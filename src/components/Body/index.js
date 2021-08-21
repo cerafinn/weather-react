@@ -17,7 +17,7 @@ function Body() {
     }
   }, [currentCity]);
 
-  var apiKey = "e8e23b4a156b56df078fbb140bab8322";
+  const apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
   const getCoord = async city => {
     const coordAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
