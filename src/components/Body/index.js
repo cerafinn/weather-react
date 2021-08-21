@@ -7,19 +7,22 @@ import { currentWeatherForecast, sevenDayForecast, capitalizeFirstLetter } from 
 
 function Body() {
   const [ currentCity, setCurrentCity ] = useState('');
+  const [ currentZip, setCurrentZip ] = useState('');
   const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
-    if(currentCity === '' || !currentCity) {
+    if (currentZip !== '') {
+      document.title = currentZip + " - Weather Dashboard"
+    } else if(currentCity === '' || !currentCity) {
       document.title = ("Weather Dashboard");      
     } else {
     document.title = (capitalizeFirstLetter(currentCity) + " - Weather Dashboard");
     }
-  }, [currentCity]);
+  }, [currentZip, currentCity]);
 
-  var apiKey = "e8e23b4a156b56df078fbb140bab8322";
+  const apiKey = "e8e23b4a156b56df078fbb140bab8322";
 
-  const getCoord = async city => {
+  const getCityCoord = async city => {
     const coordAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
     const { data } = await axios(coordAPI);
 
@@ -27,11 +30,23 @@ function Body() {
       console.log("error");
     };
     return data;
-}
+  };
+
+  const getZipCoord = async zip => {
+    const coordAPI = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zip + ",us&appid=" + apiKey;
+    const { data } = await axios(coordAPI);
+    console.log({ data });
+
+    if(!data || data.length === 0) {
+      console.log("error");
+    };
+    return data;
+  }
 
   const getForecast = async (lat, lon) => {
     const weatherAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,alerts&appid=' + apiKey;
     const { data } = await axios(weatherAPI);
+    console.log({ data })
 
     if(!data || data.length === 0) {
       console.log("error");
@@ -52,24 +67,36 @@ function Body() {
     if (!currentCity || currentCity === '') {
       console.log("error");
     }
-    const res = await getCoord(currentCity);
+    const res = await getCityCoord(currentCity);
     const weather = await getForecast(res.coord.lat, res.coord.lon);
 
     displayForecast(weather);
     
-    const totalForecast = await forecast;
-    console.log(totalForecast);
+    // const totalForecast = await forecast;
+    // console.log(totalForecast);
+  }
+
+  const searchZip = async event => {
+    event.preventDefault();
+    if (!currentZip || currentZip === '') {
+      console.log("error");
+    }
+    const res = await getZipCoord(currentZip);
+    const weather = await getForecast(res.city.coord.lat, res.city.coord.lon);
+
+    displayForecast(weather);
   }
 
   return (
     <div>
-      <div className="search-form">
-        <h3>Enter the city and country initials, or the zipcode below:</h3>
+      <div className="d-flex flex-wrap justify-content-center">
+      <div className="search-form m-1">
+        <h3>Enter the city and country initials:</h3>
         <form onSubmit={searchCity}>
           <input
             type="text"
             className="form-control"
-            placeholder="Enter city/country initials or zipcode"
+            placeholder="e.g.: London, CA or London, UK for city; 10053 for zipcode"
             id="city-name"
             value={currentCity}
             onChange={(event => setCurrentCity(event.target.value))}
@@ -78,8 +105,28 @@ function Body() {
             className="btn btn-secondary btn-lrg mt-2 search-button"
             type="submit"
             onClick={searchCity}
-          >SEARCH</button>
+          >SEARCH CITY</button>
         </form>
+      </div>
+
+        <div className="search-form m-1">
+        <h3>Enter the zipcode:</h3>
+        <form onSubmit={searchZip}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="e.g.: 10053"
+            id="city-name"
+            value={currentZip}
+            onChange={(event => setCurrentZip(event.target.value))}
+          />
+          <button
+            className="btn btn-secondary btn-lrg mt-2 search-button"
+            type="submit"
+            onClick={searchZip}
+          >SEARCH ZIPCODE</button>
+        </form>
+      </div>
       </div>
       <div id="full-forecast">
         {/* add weather forecast based on search, using weather component to build each card for the 7 days */}

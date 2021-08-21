@@ -15,6 +15,11 @@ function formatTemp(data) {
   return tempCelsius;
 };
 
+// function formatProbability(data) {
+//   const probability = (data * 100).toFixed(2)
+//   return probability;
+// };
+
 export const currentWeatherForecast = data => ({
   date: formatDate(data.current.dt),
   icon: 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '@2x.png',

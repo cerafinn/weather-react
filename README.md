@@ -23,11 +23,9 @@ In order to run the project locally, ensure that dependencies are installed by r
 
 `npm install`
 
-In order to run the application in an Android simulator, ensure that all dependencies have been installed. In the command line enter the following commands: `npm run prod` in order to create the build folder required to create the application as well as start the server on localhost:5000. Next, `ionic capacitor add android` to create the android files needed for the android application. Enter `npx cap open android` to open the android file within the simulator, or open the newly created android folder in Android Studio. The application will require a build in Android Studio prior to running the application on the simulator.
+In order to run the application in an Android simulator, ensure that all dependencies have been installed. In the command line enter the following commands: `npm run develop` in order to create the build folder required to create the application as well as start the server on localhost:5000. Next, `ionic capacitor add android` to create the android files needed for the android application. Enter `npx cap open android` to open the android file within the simulator, or open the newly created android folder in Android Studio. The application will require a build in Android Studio prior to running the application on the simulator.
 
 Alternatively, users can navigated to the [deployed link](https://cerafinn.github.io/weatherreact) on the simulator in order to view the application.
-
-Note: As of this time, the android application build fails to execute due to issues with querying the files in the build folder.
 
 <br />
 
@@ -51,6 +49,7 @@ Repo Link: [Repo Link](https://github.com/cerafinn/weatherreact)
 * React.js
 * Axios
 * Bootstrap
+* Moment
 * Capacitor
 
 <br />
